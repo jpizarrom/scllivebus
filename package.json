@@ -3,11 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "immutable": "^3.8.1",
     "react": "^15.5.3",
-    "react-dom": "^15.5.3"
+    "react-dom": "^15.5.3",
+    "react-mapbox-gl": "^1.7.0",
+    "react-redux": "^5.0.4",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
+    "socket.io-client": "^1.7.3",
+    "xml2js": "^0.4.17"
   },
   "devDependencies": {
-    "react-scripts": "0.9.5"
+    "react-scripts": "^0.9.5"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,0 +1,58 @@
+import { UPDATE_VEHICLES } from "../actions/vehicles";
+import { SEARCH_ROUTE } from "../actions/search";
+import { SEARCH_ID } from "../actions/search";
+const initialState = {vehicles: [], route: '', vehicle:'', filtered: []};
+
+const vehiclesReducer = (state = initialState, action ) => {
+  console.log('reducers', action.type);
+  var route, vehicle, vehicles, filtered;
+  switch (action.type) {
+    case UPDATE_VEHICLES:
+      route = state.route;
+      vehicle = state.vehicle;
+      console.log('reducers', action.type, route, vehicle);
+      vehicles = action.vehicles;
+      filtered = vehicles;
+      if (route){
+      	console.log('filter route');
+      	filtered = filtered.filter((val) => val.routeNumber.startsWith(route));
+      }
+      if (vehicle){
+      	console.log('filter vehicle');
+      	filtered = filtered.filter((val) => val.vehicleID.startsWith(vehicle));
+      }
+      return {...state, vehicles, filtered};
+    case SEARCH_ROUTE:
+      route = action.value;
+      vehicle = state.vehicle;
+      console.log('reducers', action.type, route, vehicle);
+      filtered = state.vehicles;
+      if (route){
+      	console.log('filter route');
+      	filtered = filtered.filter((val) => val.routeNumber.startsWith(route));
+      }
+      if (vehicle){
+      	console.log('filter vehicle');
+      	filtered = filtered.filter((val) => val.vehicleID.startsWith(vehicle));
+      }
+      return {...state, filtered, route};
+    case SEARCH_ID:
+      route = state.route;
+      vehicle = action.value;
+      console.log('reducers', action.type, route, vehicle);
+      filtered = state.vehicles;
+      if (route){
+      	console.log('filter route');
+      	filtered = filtered.filter((val) => val.routeNumber.startsWith(route));
+      }
+      if (vehicle){
+      	console.log('filter vehicle');
+      	filtered = filtered.filter((val) => val.vehicleID.startsWith(vehicle));
+      }
+      return {...state, filtered, vehicle};
+    default:
+    return state;
+  }
+}
+
+export default vehiclesReducer;
