@@ -1,6 +1,8 @@
 import { UPDATE_VEHICLES } from "../actions/vehicles";
 import { SEARCH_ROUTE } from "../actions/search";
 import { SEARCH_ID } from "../actions/search";
+import ReactGA from 'react-ga';
+
 const initialState = {vehicles: [], route: '', vehicle:'', filtered: []};
 
 const vehiclesReducer = (state = initialState, action ) => {
@@ -39,6 +41,15 @@ const vehiclesReducer = (state = initialState, action ) => {
       	console.log('filter vehicle');
       	filtered = filtered.filter((val) => val.vehicleID.toLowerCase().startsWith(vehicle));
       }
+
+      if (route && vehicle){
+        ReactGA.modalview('/search/route/'+route.toLowerCase()+'/vehicle/'+vehicle.toLowerCase());
+      } else if(route){
+        ReactGA.modalview('/search/route/'+route.toLowerCase());
+      } else if(vehicle){
+        ReactGA.modalview('/search/vehicle/'+vehicle.toLowerCase());
+      }
+
       return {...state, filtered, route};
     case SEARCH_ID:
       route = state.route;
@@ -55,6 +66,15 @@ const vehiclesReducer = (state = initialState, action ) => {
       	console.log('filter vehicle');
       	filtered = filtered.filter((val) => val.vehicleID.toLowerCase().startsWith(vehicle));
       }
+
+      if (route && vehicle){
+        ReactGA.modalview('/search/route/'+route.toLowerCase()+'/vehicle/'+vehicle.toLowerCase());
+      } else if(route){
+        ReactGA.modalview('/search/route/'+route.toLowerCase());
+      } else if(vehicle){
+        ReactGA.modalview('/search/vehicle/'+vehicle.toLowerCase());
+      }
+
       return {...state, filtered, vehicle};
     default:
     return state;

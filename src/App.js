@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import SearchBar from './SearchBar';
 import * as searchActions from "./actions/search";
 import { bindActionCreators } from "redux";
-
+import ReactGA from 'react-ga';
 
 const { accessToken, style } = config;
 
@@ -29,6 +29,7 @@ class App extends Component {
   };
 
   _markerClick = (vehicle, { feature }) => {
+    ReactGA.modalview('/'+vehicle.type.toLowerCase()+'/'+vehicle.routeNumber.toLowerCase()+'/'+vehicle.vehicleID.toLowerCase());
     this.setState({
       center: feature.geometry.coordinates,
       zoom: [14],

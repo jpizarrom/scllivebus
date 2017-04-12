@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from "redux";
 import reducers from "./reducers/index";
+import ReactGA from 'react-ga';
 
 const store = createStore(
   reducers,
@@ -32,7 +33,8 @@ export default class Main extends Component {
   }
 
   render() {
-
+    ReactGA.set({ page: window.location.pathname });
+    ReactGA.pageview(window.location.pathname);
     return (
         <Provider store={store}>
           <App />
