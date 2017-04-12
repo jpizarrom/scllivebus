@@ -80,10 +80,8 @@ class App extends Component {
 
     return (
       <div>
-      <nav style={styles.nav}>
-          <SearchBar onTermChange={this.props.actions.search_route} />
-          <SearchBar onTermChange={this.props.actions.search_id} />
-      </nav>
+          <SearchBar placeholder='route' onTermChange={this.props.actions.search_route} />
+          <SearchBar placeholder='vehicle id' onTermChange={this.props.actions.search_id} />
       <VehicleSocket>
         <ReactMapboxGl
           style={style}
@@ -104,7 +102,7 @@ class App extends Component {
           <Layer
             type="symbol"
             id="marker"
-            layout={{ "icon-image": "marker-15" }}>
+            layout={{ "icon-image": "bus-15" }}>
             {
               vehicles
                 .map((st, index) => (

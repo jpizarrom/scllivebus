@@ -34,11 +34,9 @@ export default class Main extends Component {
   render() {
 
     return (
-      <div>
         <Provider store={store}>
           <App />
         </Provider>
-      </div>
     );
   }
 }
