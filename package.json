@@ -17,6 +17,7 @@
     "react-scripts": "^0.9.5"
   },
   "scripts": {
+    "clean": "rm -rf build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - 6
+  - "6"
 
 build:
   ci:
@@ -12,21 +12,27 @@ build:
 
   post_ci:
     - >-
+       if [ "$IS_FORK" == "false" ]; then
+       npm run clean &&
        CI= shippable_retry npm run build &&
-       cd build &&
-       echo scllivebus.pedalean.com > CNAME &&
-       git init &&
-       git add -A . &&
+       git clone . /tmp/demo &&
+       cd /tmp/demo &&
+       git remote set-url origin git@github.com:${REPO_FULL_NAME}.git &&
        git config user.email "jpizarrom@gmail.com" &&
        git config user.name "jpizarrom" &&
+       git fetch &&
+       git checkout gh-pages &&
+       rm -r * &&
+       echo scllivebus.pedalean.com > CNAME &&
+       cp -r ${SHIPPABLE_BUILD_DIR}/build/* . &&
+       git add -A . &&
        git commit -m "Update demo for ${GIT_TAG_NAME} [skip ci]" &&
-       git remote add origin git@github.com:${REPO_FULL_NAME}.git &&
-       shippable_retry git push origin master:gh-pages -f;
+       shippable_retry git push origin gh-pages;
+       fi
 
   cache: true
   cache_dir_list:
     - $SHIPPABLE_BUILD_DIR/node_modules
-    - $SHIPPABLE_BUILD_DIR/elm-stuff
     - $SHIPPABLE_BUILD_DIR/.git
 
 branches:
