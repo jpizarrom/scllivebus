@@ -4,10 +4,13 @@
   "private": true,
   "dependencies": {
     "immutable": "^3.8.1",
+    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
     "react": "^15.5.3",
     "react-dom": "^15.5.3",
     "react-ga": "^2.2.0",
     "react-mapbox-gl": "1.7.0",
+    "react-moment": "^0.2.4",
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
