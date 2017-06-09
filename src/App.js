@@ -9,6 +9,7 @@ import SearchBar from './SearchBar';
 import * as searchActions from "./actions/search";
 import { bindActionCreators } from "redux";
 import ReactGA from 'react-ga';
+import Moment from 'react-moment';
 
 const { accessToken, style } = config;
 
@@ -39,9 +40,9 @@ class App extends Component {
 
   _onDrag = () => {
     if (this.state.vehicle) {
-      this.setState({
-        vehicle: null,
-      });
+      // this.setState({
+      //   vehicle: null,
+      // });
     }
   }
 
@@ -78,6 +79,15 @@ class App extends Component {
   render() {
     const { vehicles } = this.props;
     const { vehicle, popupShowLabel, fitBounds } = this.state;
+
+    const _this = this;
+    vehicles
+    .filter(function(v) { return vehicle && v.vehicleID===vehicle.vehicleID && v!==vehicle; })
+    .map(function(v) {
+      _this.setState({
+        vehicle:v
+      })
+    })
 
     return (
       <div>
@@ -145,6 +155,7 @@ class App extends Component {
             <div style={styles.stationDescription}>
               <p>{ vehicle.routeNumber }</p>
               <p>{ vehicle.vehicleID } </p>
+              <p><Moment format="DD-MM-YYYY HH:mm:ss" parse="DD-MM-YYYY HH:mm:ss Z" tz="America/Santiago">{ vehicle.dateTrans } Z </Moment></p>
             </div>
           )
         }
