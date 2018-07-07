@@ -13,7 +13,7 @@ var io = require("socket.io-client");
 
 class VehicleSocket extends Component {
   componentDidMount() {
-    this.socket = io('http://scllivebus-server.pedalean.com:8080', {
+    this.socket = io('https://dust-surfboard.glitch.me', {
       transports: ['websocket']
     });
     this.socket.on('vehicles_update', (data) => this.props.actions.updateVehicles(data));
